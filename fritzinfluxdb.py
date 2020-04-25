@@ -51,7 +51,7 @@ def sanatize_fb_return_data(results):
 def query_points(fc, services):
     result = {}
 
-    for service, content in services.items():
+    for service, content in list(services.items()):
 
         for action in content['actions']:
 
@@ -179,7 +179,7 @@ def main():
     auth_services = get_services(config, "auth_service")
 
     while running:
-        points = query_points(fritz_client_unauth, unauth_services)
+        points = query_points(fritz_client_auth, auth_services)
         points.update(query_points(fritz_client_auth, auth_services))
         data = {
             "measurement": config.get('influxdb', 'measurement_name'),
