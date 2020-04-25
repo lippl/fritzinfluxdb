@@ -150,7 +150,7 @@ def query_services(fc, services):
 
         return call_result
 
-    for service, content in services.items():
+    for service, content in list(services.items()):
 
         for action in content['actions']:
 
