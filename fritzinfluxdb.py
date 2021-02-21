@@ -44,6 +44,8 @@ def parse_args():
 
     parser.add_argument("-c", "--config", dest="config_file", default=default_config,
                         help="define config file (default: " + default_config + ")")
+    parser.add_argument("-i", "--interval", type=int, dest="interval", default=10,
+                        help="define poll interval (default: 10s)")
     parser.add_argument("-d", "--daemon", action='store_true',
                         help="define if the script is run as a systemd daemon")
     parser.add_argument("-v", "--verbose", action='store_true',
@@ -295,8 +297,8 @@ def main():
         except Exception:
             logging.error("Failed to write to InfluxDB %s" % config.get('influxdb', 'host'))
 
-        # just sleep for 10 seconds
-        time.sleep(10)
+        # just sleep
+        time.sleep(args.interval)
 
 
 if __name__ == "__main__":
